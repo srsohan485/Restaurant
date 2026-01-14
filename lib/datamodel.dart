@@ -1,4 +1,6 @@
-import 'dart:ui';
+
+
+import 'package:flutter/material.dart';
 
 class DashboardHeader {
   final String title;
@@ -66,6 +68,39 @@ class WeeklySales {
     required this.day,
     required this.orders,
     required this.sales,
+  });
+}
+
+
+class TableSummary {
+  final String title;
+  final int count;
+  final Color color;
+
+  TableSummary({
+    required this.title,
+    required this.count,
+    required this.color,
+  });
+}
+
+
+
+enum TableStatus { available, occupied, reserved }
+
+class TableModel {
+  final String tableNo;
+  final int seats;
+  final TableStatus status;
+  final String? refNo;     // #ORD / #RSV
+  final String? timeText; // 45 min / Reserved 7:00 PM
+
+  TableModel({
+    required this.tableNo,
+    required this.seats,
+    required this.status,
+    this.refNo,
+    this.timeText,
   });
 }
 

@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurantpro/table.dart';
 
 import 'datamodel.dart';
 class Dashboard extends StatefulWidget {
@@ -42,13 +43,13 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   List<WeeklySales> weeklySalesList = [
-    WeeklySales(day: "Mon", orders: 120, sales: 3000),
-    WeeklySales(day: "Tue", orders: 150, sales: 4500),
-    WeeklySales(day: "Wed", orders: 110, sales: 3200),
-    WeeklySales(day: "Thu", orders: 140, sales: 3800),
-    WeeklySales(day: "Fri", orders: 160, sales: 6000),
-    WeeklySales(day: "Sat", orders: 130, sales: 4200),
-    WeeklySales(day: "Sun", orders: 100, sales: 2800),
+    WeeklySales(day: "Mon", orders: 120, sales: 3000.0),
+    WeeklySales(day: "Tue", orders: 150, sales: 4500.0),
+    WeeklySales(day: "Wed", orders: 110, sales: 3200.0),
+    WeeklySales(day: "Thu", orders: 140, sales: 3800.0),
+    WeeklySales(day: "Fri", orders: 160, sales: 6000.0),
+    WeeklySales(day: "Sat", orders: 130, sales: 4200.0),
+    WeeklySales(day: "Sun", orders: 100, sales: 2800.0),
   ];
 
   final List<RecentOrder> recentOrders = [
@@ -86,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true,
+
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
@@ -110,18 +111,43 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
       ),
+
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'Menu'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Stats'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Alert'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
+        currentIndex: 0,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Dashboard()),
+            );
+          } else if (index == 1) {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => StockRequisition()),
+            // );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Tablescreen()),
+            );
+          } else if (index == 3){
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()),);
+          }
+        },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined), label: 'POS'),
+            BottomNavigationBarItem(icon: Icon(Icons.table_chart), label: 'Tables'),
+            BottomNavigationBarItem(icon: Icon(Icons.kitchen), label: 'Kitchen'),
+            BottomNavigationBarItem(icon: Icon(Icons.view_day_sharp), label: 'Inventory'),
+          ],
       ),
+
+
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -160,7 +186,6 @@ class _DashboardState extends State<Dashboard> {
                 const SizedBox(height: 20),
 
                 /// 🔹 GridView (4 items - center look)
-              /// 🔹 GridView (4 items - center look)
               GridView.builder(
                 itemCount: dashboardStats.length,
                 shrinkWrap: true,
@@ -176,22 +201,29 @@ class _DashboardState extends State<Dashboard> {
 
                   // icon map: string -> IconData
                   IconData iconData;
+                  Color iconBgColor;
                   switch (stat.icon) {
                     case "revenue":
                       iconData = Icons.attach_money;
+                      iconBgColor = Colors.green;
                       break;
                     case "orders":
                       iconData = Icons.list_alt;
+                      iconBgColor = Colors.blue;
                       break;
                     case "tables":
                       iconData = Icons.table_chart;
+                      iconBgColor = Colors.deepOrange;
                       break;
                     case "average":
-                      iconData = Icons.monetization_on;
+                      iconData = Icons.show_chart;
+                      iconBgColor = Colors.purple;
                       break;
                     default:
                       iconData = Icons.fastfood;
+                      iconBgColor = Colors.green.shade100;
                   }
+
 
                   return InkWell(
                     borderRadius: BorderRadius.circular(10),
@@ -201,8 +233,16 @@ class _DashboardState extends State<Dashboard> {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08), // shadow color
+                            blurRadius: 10, // shadow softness
+                            spreadRadius: 1,
+                            offset: const Offset(0, 6), // নিচের দিকে shadow
+                          ),
+                        ],
                       ),
                       child: Row(
                         children: [
@@ -238,10 +278,10 @@ class _DashboardState extends State<Dashboard> {
                             width: 36,
                             height: 36,
                             decoration: BoxDecoration(
-                              color: Colors.blue.shade100,
+                              color: iconBgColor,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Icon(iconData, color: Colors.blue, size: 22),
+                            child: Icon(iconData, color: Colors.white, size: 22),
                           ),
                         ],
                       ),
@@ -251,48 +291,129 @@ class _DashboardState extends State<Dashboard> {
               ),
 
 
-
-
-
-
                 const SizedBox(height: 30),
 
                 /// 🔹 Pie Chart (center)
-                SizedBox(
-                  height: 220,
-                  child: PieChart(
-                    PieChartData(
-                      centerSpaceRadius: 40,
-                      sectionsSpace: 2,
-                      sections: [
-                        PieChartSectionData(
-                          value: 40,
-                          color: Colors.blue,
-                          title: 'Food',
-                          radius: 60,
-                        ),
-                        PieChartSectionData(
-                          value: 30,
-                          color: Colors.orange,
-                          title: 'Drinks',
-                          radius: 60,
-                        ),
-                        PieChartSectionData(
-                          value: 20,
-                          color: Colors.green,
-                          title: 'Snacks',
-                          radius: 60,
-                        ),
-                        PieChartSectionData(
-                          value: 10,
-                          color: Colors.red,
-                          title: 'Others',
-                          radius: 60,
-                        ),
-                      ],
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.08),
+                      blurRadius: 10,
+                      offset: const Offset(0, 6),
                     ),
-                  ),
+                  ],
                 ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Weekly Sales Overview",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    SizedBox(
+                      height: 250,
+                      child: BarChart(
+                        BarChartData(
+                          maxY: weeklySalesList
+                              .map((e) => e.sales)
+                              .reduce((a, b) => a > b ? a : b) +
+                              500,
+                          barTouchData: BarTouchData(enabled: false),
+                          alignment: BarChartAlignment.spaceAround,
+                          gridData: FlGridData(show: false),
+                          borderData: FlBorderData(show: false),
+                          titlesData: FlTitlesData(
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 36,
+                                getTitlesWidget: (value, meta) {
+                                  return Text(
+                                    value.toInt().toString(),
+                                    style: const TextStyle(fontSize: 10, color: Colors.grey),
+                                  );
+                                },
+                              ),
+                            ),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                getTitlesWidget: (value, meta) {
+                                  int index = value.toInt();
+                                  if (index >= 0 && index < weeklySalesList.length) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Text(
+                                        weeklySalesList[index].day,
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return const SizedBox.shrink();
+                                },
+                              ),
+                            ),
+                          ),
+                          barGroups: weeklySalesList.asMap().entries.map((entry) {
+                            int index = entry.key;
+                            WeeklySales data = entry.value;
+
+                            final colors = [
+                              Colors.blue,
+                              Colors.green,
+                              Colors.orange,
+                              Colors.purple,
+                              Colors.red,
+                              Colors.teal,
+                              Colors.indigo,
+                            ];
+
+                            return BarChartGroupData(
+                              x: index,
+                              barRods: [
+                                BarChartRodData(
+                                  toY: data.sales,
+                                  width: 22,
+                                  color: colors[index % colors.length],
+                                  borderRadius: BorderRadius.circular(6),
+                                  backDrawRodData: BackgroundBarChartRodData(
+                                    show: false,
+                                    toY: weeklySalesList
+                                        .map((e) => e.sales)
+                                        .reduce((a, b) => a > b ? a : b) +
+                                        500,
+                                    color: Colors.grey.shade200,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+
+
+
+
+
+
+
 
                 const SizedBox(height: 16),
 
