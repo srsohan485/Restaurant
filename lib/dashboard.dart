@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurantpro/pos.dart';
 import 'package:restaurantpro/table.dart';
 
+import 'Inventory.dart';
 import 'datamodel.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -63,6 +64,7 @@ class _DashboardState extends State<Dashboard> {
     const Dashboard(),
     POSpage(),
     Tablescreen(),
+    Inventory()
 
   ];
 
@@ -83,7 +85,6 @@ class _DashboardState extends State<Dashboard> {
     RecentOrder(orderId: "#ORD-1237", table: "Table 1", amount: "\$36.80", status: "Completed"),
     RecentOrder(orderId: "#ORD-1238", table: "Table 12", amount: "\$58.20", status: "Preparing"),
   ];
-
 
   final List<TopDish> topDishes = [
     TopDish(rank: 1, name: "Butter Chicken", revenue: "\$540", orders: "45 orders"),
@@ -290,7 +291,10 @@ class _DashboardState extends State<Dashboard> {
               MaterialPageRoute(builder: (context) => Tablescreen()),
             );
           } else if (index == 3){
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()),);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Inventory()),
+            );
           }
         },
           items: const [
