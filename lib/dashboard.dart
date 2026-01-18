@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurantpro/pos.dart';
 import 'package:restaurantpro/table.dart';
 
 import 'datamodel.dart';
@@ -11,6 +12,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<DashboardStat> dashboardStats = [
     DashboardStat(
       title: "Today's Revenue",
@@ -40,6 +42,28 @@ class _DashboardState extends State<Dashboard> {
       isPositive: true,
       icon: "average",
     ),
+  ];
+
+  int selectedIndex = -1;
+
+  final drawerItems = [
+    {'icon': Icons.dashboard, 'title': 'Dashboard'},
+    {'icon': Icons.shopping_cart_outlined, 'title': 'POS'},
+    {'icon': Icons.table_chart, 'title': 'Table'},
+    {'icon': Icons.kitchen, 'title': 'Kitchen'},
+    {'icon': Icons.view_day_sharp, 'title': 'Inventory'},
+    {'icon': Icons.people, 'title': 'Customers'},
+    {'icon': Icons.person, 'title': 'Staff'},
+    {'icon': Icons.bar_chart, 'title': 'Reports'},
+    {'icon': Icons.local_offer, 'title': 'Offers'},
+    {'icon': Icons.settings, 'title': 'Settings'},
+  ];
+
+  final List<Widget> drawerPages = [
+    const Dashboard(),
+    POSpage(),
+    Tablescreen(),
+
   ];
 
   List<WeeklySales> weeklySalesList = [
@@ -74,11 +98,14 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () {},
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
         ),
         title: const Text(
           'ResturanPro',
@@ -111,6 +138,135 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
       ),
+      drawer: Drawer(
+        backgroundColor: Color(0xFF193CB8),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+
+            Container(
+              height: 130,
+              child: DrawerHeader(child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Menu",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                        Text("All Modules",style: TextStyle(color: Colors.white),),
+                      ],
+                    ),
+
+                  IconButton(
+                    icon: const Icon(Icons.close, size: 28, color: Colors.white),
+                    onPressed: () {
+                      Navigator.pop(context); // page close
+                    },
+                  ),
+                ],
+              )),
+            ),
+
+            // Drawer Menu Items
+            ...drawerItems.asMap().entries.map((entry) {
+              int idx = entry.key;
+              Map item = entry.value;
+
+              bool isSelected = selectedIndex == idx;
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12), //borderradius
+                    splashColor: const Color(0xFFFF6900).withOpacity(0.35),
+                    highlightColor: Colors.transparent,
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = idx;
+                      });
+
+                      Navigator.pop(context);
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => drawerPages[idx],
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? const Color(0xFFFF6900) //solid orange
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                        leading: Icon(item['icon'], color: Colors.white),
+                        title: Text(
+                          item['title'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+
+
+            Container(
+              height: 150,
+              child: DrawerHeader(
+                decoration: BoxDecoration(color: Color(0xFF193CB8)),
+                child: Card(
+                  color: Colors.blue[700],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 4,
+
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Profile Image
+                        CircleAvatar(
+                          radius: 25, // Image size সামান্য ছোট করা
+                          backgroundImage: NetworkImage(
+                              'https://i.pravatar.cc/150?img=3'), // Profile image
+                        ),
+                        const SizedBox(width: 12),
+                        // Text Column
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "DashIT-BD",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              "dashit-bd@gmail.com",
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
@@ -124,10 +280,10 @@ class _DashboardState extends State<Dashboard> {
               MaterialPageRoute(builder: (context) => Dashboard()),
             );
           } else if (index == 1) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => StockRequisition()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => POSpage()),
+            );
           } else if (index == 2) {
             Navigator.push(
               context,
@@ -157,7 +313,7 @@ class _DashboardState extends State<Dashboard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                /// 🔹 3 Center Text
+                //Center Text
                 const Text(
                   "Dashboard",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -185,7 +341,7 @@ class _DashboardState extends State<Dashboard> {
 
                 const SizedBox(height: 20),
 
-                /// 🔹 GridView (4 items - center look)
+                //GridView (4 items - center look)
               GridView.builder(
                 itemCount: dashboardStats.length,
                 shrinkWrap: true,
@@ -293,7 +449,7 @@ class _DashboardState extends State<Dashboard> {
 
                 const SizedBox(height: 30),
 
-                /// 🔹 Pie Chart (center)
+                //Pie Chart (center)
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -417,7 +573,7 @@ class _DashboardState extends State<Dashboard> {
 
                 const SizedBox(height: 16),
 
-                /// 🔹 Center Text
+                //Center Text
                 const Text(
                   "Sales by Category",
                   textAlign: TextAlign.center,

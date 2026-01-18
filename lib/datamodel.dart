@@ -94,6 +94,10 @@ class TableModel {
   final TableStatus status;
   final String? refNo;     // #ORD / #RSV
   final String? timeText; // 45 min / Reserved 7:00 PM
+  final int guests;
+  final double currentBill;
+
+  bool isExpanded; // dropdown control
 
   TableModel({
     required this.tableNo,
@@ -101,7 +105,45 @@ class TableModel {
     required this.status,
     this.refNo,
     this.timeText,
+    this.guests = 0,
+    this.currentBill = 0,
+    this.isExpanded = false,
   });
 }
+
+// Menu Item Model
+class MenuItem {
+  final String name;
+  final String category;
+  final double price;
+  final bool isAvailable;
+  final String icon; // Optional, emoji or icon path
+
+  MenuItem({
+    required this.name,
+    required this.category,
+    required this.price,
+    required this.isAvailable,
+    this.icon = '🍽️',
+  });
+}
+
+class Category {
+  final String name;
+
+  Category({required this.name});
+}
+
+List<Category> categories = [
+  Category(name: 'All Items'),
+  Category(name: 'Appetizers'),
+  Category(name: 'Main Course'),
+  Category(name: 'Beverages'),
+  Category(name: 'Desserts'),
+];
+
+
+
+
 
 
