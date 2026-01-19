@@ -18,7 +18,7 @@ class _EmployeePageState extends State<EmployeePage> {
 
   int selectedTab = 0;
   final List<String> tabs = [
-    "All",
+    "All Categoris",
     "Meat",
     "Vegetables",
     "Dairy"

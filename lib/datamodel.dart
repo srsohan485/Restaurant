@@ -236,6 +236,69 @@ class EmployeeData {
 
 
 
+// Inventory Summary Model
+class InventorySummary {
+  final int totalItems;
+  final int lowStockItems;
+  final double totalValue;
+  final List<String> lowStockNames;
+
+  InventorySummary({
+    required this.totalItems,
+    required this.lowStockItems,
+    required this.totalValue,
+    required this.lowStockNames,
+  });
+}
+
+// Inventory Item Model
+class InventoryItem {
+  final String name;
+  final String category;
+  final int quantity;
+  final double price;
+  final bool isLowStock;
+
+  InventoryItem({
+    required this.name,
+    required this.category,
+    required this.quantity,
+    required this.price,
+    required this.isLowStock,
+  });
+}
+
+
+final inventorySummary = InventorySummary(
+  totalItems: 12,
+  lowStockItems: 4,
+  totalValue: 1423.00,
+  lowStockNames: [
+    "Tomatoes",
+    "Paneer",
+    "Cumin Seeds",
+    "Coriander"
+  ],
+);
+
+final List<InventoryItem> inventoryItems = [
+  InventoryItem(
+    name: "Chicken Breast",
+    category: "Meat",
+    quantity: 20,
+    price: 350,
+    isLowStock: false,
+  ),
+  InventoryItem(
+    name: "Tomatoes",
+    category: "Vegetables",
+    quantity: 3,
+    price: 60,
+    isLowStock: true,
+  ),
+];
+
+
 
 
 

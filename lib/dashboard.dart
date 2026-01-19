@@ -5,6 +5,7 @@ import 'package:restaurantpro/table.dart';
 
 import 'employepage.dart';
 import 'datamodel.dart';
+import 'invetory.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
@@ -64,7 +65,8 @@ class _DashboardState extends State<Dashboard> {
     const Dashboard(),
     POSpage(),
     Tablescreen(),
-    EmployeePage()
+    EmployeePage(),
+    InventoryPage(),
 
   ];
 
