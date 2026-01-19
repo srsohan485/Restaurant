@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurantpro/table.dart';
+import 'employepage.dart';
+import 'dashboard.dart';
 import 'datamodel.dart';
 import 'proparticepage.dart';
 
@@ -225,6 +228,50 @@ class _POSpageState extends State<POSpage> {
           ],
         ),
       ),
+
+      //bottomNavigationBar
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Dashboard()),
+            );
+          } else if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => POSpage()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Tablescreen()),
+            );
+          } else if (index == 3){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EmployeePage()),
+            );
+          }else if (index == 5) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EmployeePage()),
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined), label: 'POS'),
+          BottomNavigationBarItem(icon: Icon(Icons.table_chart), label: 'Tables'),
+          BottomNavigationBarItem(icon: Icon(Icons.kitchen), label: 'Kitchen'),
+          BottomNavigationBarItem(icon: Icon(Icons.view_day_sharp), label: 'Inventory'),
+        ],
+      ),
+
     );
   }
 }

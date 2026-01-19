@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurantpro/pos.dart';
 import 'package:restaurantpro/table.dart';
 
-import 'Inventory.dart';
+import 'employepage.dart';
 import 'datamodel.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -64,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
     const Dashboard(),
     POSpage(),
     Tablescreen(),
-    Inventory()
+    EmployeePage()
 
   ];
 
@@ -293,7 +293,7 @@ class _DashboardState extends State<Dashboard> {
           } else if (index == 3){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Inventory()),
+              MaterialPageRoute(builder: (context) => EmployeePage()),
             );
           }
         },
