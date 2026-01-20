@@ -6,6 +6,7 @@ import 'package:restaurantpro/table.dart';
 import 'employepage.dart';
 import 'datamodel.dart';
 import 'invetory.dart';
+import 'kitchenpage.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
@@ -66,6 +67,7 @@ class _DashboardState extends State<Dashboard> {
     POSpage(),
     Tablescreen(),
     EmployeePage(),
+    KitchenOrderPage(),
     InventoryPage(),
 
   ];
@@ -272,7 +274,6 @@ class _DashboardState extends State<Dashboard> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.grey,
@@ -295,8 +296,10 @@ class _DashboardState extends State<Dashboard> {
           } else if (index == 3){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => EmployeePage()),
+              MaterialPageRoute(builder: (context) => KitchenOrderPage()),
             );
+          } else if (index == 4){
+            Navigator.push(context, MaterialPageRoute(builder: (contex)=>InventoryPage()));
           }
         },
           items: const [

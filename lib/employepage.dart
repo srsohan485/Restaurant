@@ -108,7 +108,6 @@ class _EmployeePageState extends State<EmployeePage> {
 
       //bottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
@@ -139,10 +138,10 @@ class _EmployeePageState extends State<EmployeePage> {
             //   MaterialPageRoute(builder: (context) => POSpage()),
             // );
           }else if (index == 5) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => EmployeePage()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => EmployeePage()),
+            // );
           }
         },
         items: const [
@@ -153,6 +152,8 @@ class _EmployeePageState extends State<EmployeePage> {
           BottomNavigationBarItem(icon: Icon(Icons.view_day_sharp), label: 'Inventory'),
         ],
       ),
+
+
 
     );
   }
