@@ -7,6 +7,7 @@ import 'employepage.dart';
 import 'datamodel.dart';
 import 'invetory.dart';
 import 'kitchenpage.dart';
+import 'offerspage.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
@@ -69,6 +70,7 @@ class _DashboardState extends State<Dashboard> {
     EmployeePage(),
     KitchenOrderPage(),
     InventoryPage(),
+    OffersPage(),
 
   ];
 

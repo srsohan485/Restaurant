@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
 import 'datamodel.dart';
+import 'invetory.dart';
+import 'kitchenpage.dart';
 
 class Tablescreen extends StatefulWidget {
   const Tablescreen({super.key});
@@ -178,6 +180,16 @@ class _TableState extends State<Tablescreen> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Tablescreen()),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => KitchenOrderPage()),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => InventoryPage()),
             );
           }
         },

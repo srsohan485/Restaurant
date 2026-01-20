@@ -300,6 +300,85 @@ final List<InventoryItem> inventoryItems = [
 
 
 
+class OfferModel {
+  final String title;
+  final String description;
+  final int discountPercent;
+  final String discountType; // OFF / ৳ / %
+  final String usageStatus; // ACTIVE / INACTIVE
+  final int used;
+  final int totalUsage;
+  final DateTime validFrom;
+  final DateTime validTo;
+  final bool isActive;
+
+  OfferModel({
+    required this.title,
+    required this.description,
+    required this.discountPercent,
+    required this.discountType,
+    required this.usageStatus,
+    required this.used,
+    required this.totalUsage,
+    required this.validFrom,
+    required this.validTo,
+    required this.isActive,
+  });
+}
+
+
+class OfferSummaryModel {
+  final String title;
+  final int value;
+  final IconData icon;
+  final Color color;
+
+  OfferSummaryModel({
+    required this.title,
+    required this.value,
+    required this.icon,
+    required this.color,
+  });
+}
+
+
+final List<OfferSummaryModel> summaryList = [
+  OfferSummaryModel(
+    title: "Active Offers",
+    value: 3,
+    icon: Icons.local_offer,
+    color: Colors.green,
+  ),
+  OfferSummaryModel(
+    title: "Scheduled",
+    value: 1,
+    icon: Icons.calendar_month,
+    color: Colors.blue,
+  ),
+  OfferSummaryModel(
+    title: "Total Usage",
+    value: 898,
+    icon: Icons.trending_up,
+    color: Colors.orange,
+  ),
+];
+
+final OfferModel weekendOffer = OfferModel(
+  title: "Weekend Special",
+  description: "Get 20% off on all orders above \$50",
+  discountPercent: 20,
+  discountType: "%",
+  usageStatus: "ACTIVE",
+  used: 125,
+  totalUsage: 500,
+  validFrom: DateTime(2024, 1, 12),
+  validTo: DateTime(2024, 1, 14),
+  isActive: true,
+);
+
+
+
+
 
 
 
