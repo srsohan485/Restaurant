@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurantpro/table.dart';
+import 'package:restaurantpro/screen/table.dart';
 import 'employepage.dart';
 import 'dashboard.dart';
-import 'datamodel.dart';
+import '../core/model/datamodel.dart';
 import 'proparticepage.dart';
 
 class POSpage extends StatefulWidget {

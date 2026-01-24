@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurantpro/pos.dart';
-import 'package:restaurantpro/proparticepage.dart';
-import 'package:restaurantpro/table.dart';
+import 'package:restaurantpro/screen/pos.dart';
+import 'package:restaurantpro/screen/proparticepage.dart';
+import 'package:restaurantpro/screen/table.dart';
 
 import 'dashboard.dart';
 import 'employepage.dart';

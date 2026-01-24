@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurantpro/reportpage.dart';
+import 'package:restaurantpro/screen/reportpage.dart';
 
-import 'customerpage.dart';
-import 'dashboard.dart';
+import 'screen/customerpage.dart';
+import 'screen/dashboard.dart';
 
 void main() {
   runApp(const MyApp());

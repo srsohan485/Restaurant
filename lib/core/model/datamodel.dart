@@ -416,6 +416,84 @@ List<Customer> customers = [
   ),
 ];
 
+class SystemSettings {
+  RestaurantInfo restaurantInfo;
+  BusinessSettings businessSettings;
+  NotificationSettings notificationSettings;
+  PaymentSettings paymentSettings;
+  PrinterSettings printerSettings;
+  UserManagement userManagement;
+  SecuritySettings securitySettings;
+  DataManagement dataManagement;
+  SystemInformation systemInformation;
+
+  SystemSettings({
+    required this.restaurantInfo,
+    required this.businessSettings,
+    required this.notificationSettings,
+    required this.paymentSettings,
+    required this.printerSettings,
+    required this.userManagement,
+    required this.securitySettings,
+    required this.dataManagement,
+    required this.systemInformation,
+  });
+}
+
+// -------- Each Section --------
+
+class RestaurantInfo {
+  String name, address, phone, email;
+  RestaurantInfo(this.name, this.address, this.phone, this.email);
+}
+
+class BusinessSettings {
+  String currency, timezone;
+  String taxRate, serviceCharge;
+  BusinessSettings(this.currency, this.timezone, this.taxRate, this.serviceCharge);
+}
+
+class NotificationSettings {
+  bool newOrder, lowStock, dailyReport, feedback;
+  NotificationSettings(this.newOrder, this.lowStock, this.dailyReport, this.feedback);
+}
+
+class PaymentSettings {
+  bool cash, card, mobile, split;
+  PaymentSettings(this.cash, this.card, this.mobile, this.split);
+}
+
+class PrinterSettings {
+  String kitchen, receipt;
+  bool autoKOT, autoBill;
+  PrinterSettings(this.kitchen, this.receipt, this.autoKOT, this.autoBill);
+}
+
+class UserManagement {
+  int total, admin, staff;
+  bool roleAccess;
+  UserManagement(this.total, this.admin, this.staff, this.roleAccess);
+}
+
+class SecuritySettings {
+  bool twoFA, logging;
+  String timeout, passwordPolicy;
+  SecuritySettings(this.twoFA, this.timeout, this.passwordPolicy, this.logging);
+}
+
+class DataManagement {
+  String backupTime, retention, export, lastBackup;
+  DataManagement(this.backupTime, this.retention, this.export, this.lastBackup);
+}
+
+class SystemInformation {
+  String version, license, validUntil, support;
+  SystemInformation(this.version, this.license, this.validUntil, this.support);
+}
+
+
+
+
 
 
 

@@ -1,12 +1,13 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:restaurantpro/pos.dart';
-import 'package:restaurantpro/reportpage.dart';
-import 'package:restaurantpro/table.dart';
+import 'package:restaurantpro/screen/pos.dart';
+import 'package:restaurantpro/screen/reportpage.dart';
+import 'package:restaurantpro/screen/systemsetting.dart';
+import 'package:restaurantpro/screen/table.dart';
 
 import 'customerpage.dart';
 import 'employepage.dart';
-import 'datamodel.dart';
+import '../core/model/datamodel.dart';
 import 'invetory.dart';
 import 'kitchenpage.dart';
 import 'offerspage.dart';
@@ -75,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
     EmployeePage(),
     Reportpage(),
     OffersPage(),
-
+    Systemsetting()
 
   ];
 

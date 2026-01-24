@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
-import 'datamodel.dart';
+import '../core/model/datamodel.dart';
 import 'invetory.dart';
 import 'kitchenpage.dart';
 
