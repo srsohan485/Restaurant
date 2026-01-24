@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:restaurantpro/pos.dart';
+import 'package:restaurantpro/proparticepage.dart';
+import 'package:restaurantpro/table.dart';
 
-void main() => runApp(const RestaurantProApp());
-
-class RestaurantProApp extends StatelessWidget {
-  const RestaurantProApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'RestaurantPro',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFF5F7FA),
-      ),
-      home: const ReportsAnalyticsPage(),
-    );
-  }
-}
-
-class ReportsAnalyticsPage extends StatefulWidget {
-  const ReportsAnalyticsPage({super.key});
+import 'dashboard.dart';
+import 'employepage.dart';
+class Reportpage extends StatefulWidget {
+  const Reportpage({super.key});
 
   @override
-  State<ReportsAnalyticsPage> createState() => _ReportsAnalyticsPageState();
+  State<Reportpage> createState() => _ReportpageState();
 }
 
-class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
-  // 模拟数据
+class _ReportpageState extends State<Reportpage> {
+
   final List<Map<String, dynamic>> metricCards = [
     {
       'title': 'Total Revenue',
@@ -74,49 +61,26 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'RestaurantPro',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Reports & Analytics',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.download),
-              label: const Text('Export'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[700],
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ),
-        ],
+
+      appBar: customAppBar(
+        title: "ResturanPro",
+        onMenuPressed: () => print("Menu clicked"),
+        onNotificationPressed: () => print("Notification clicked"),
+        onProfilePressed: () => print("Profile clicked"),
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 时间范围选择
-              Row(
+
+                Text("Reports & Analytics",style: TextStyle(fontSize: 20),),
+                SizedBox(height: 7,),
+                Text("Business insights and performance metrics"),
+                SizedBox(height: 7,),
+                Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -129,10 +93,17 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  const Text('1 Year', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(width: 16),
-                  const Text('Custom', style: TextStyle(color: Colors.grey)),
+                  SizedBox(width: 10,),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.download),
+                    label: const Text('Export'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green[700],
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                    ),
+                  ),
                 ],
               ),
 
@@ -171,8 +142,7 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                             .toList(),
                       ),
                       const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
+                      Column(
                           children: [
                             Expanded(
                               child: Row(
@@ -200,7 +170,7 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                             ),
                           ],
                         ),
-                      ),
+
                     ],
                   ),
                 ),
@@ -208,14 +178,13 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
 
               const SizedBox(height: 24),
 
-              // 订单和客户增长
+
               _buildChartCard(
                 title: 'Orders & Customer Growth',
                 child: SizedBox(
                   height: 200,
                   child: Row(
                     children: [
-                      // Y轴标签
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: ['600', '450', '300', '150', '0']
@@ -223,8 +192,7 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                             .toList(),
                       ),
                       const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
+                      Column(
                           children: [
                             Expanded(
                               child: Row(
@@ -237,7 +205,7 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          // 客户柱状图
+
                                           Container(
                                             height: customers[index] / 2,
                                             decoration: BoxDecoration(
@@ -248,7 +216,7 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                                               ),
                                             ),
                                           ),
-                                          // 订单柱状图
+
                                           Container(
                                             height: orders[index] / 2,
                                             decoration: BoxDecoration(
@@ -280,7 +248,7 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                             ),
                           ],
                         ),
-                      ),
+
                     ],
                   ),
                 ),
@@ -291,65 +259,6 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 小时订单分布
-                  Expanded(
-                    child: _buildChartCard(
-                      title: 'Hourly Order Distribution',
-                      child: SizedBox(
-                        height: 200,
-                        child: Row(
-                          children: [
-                            // Y轴标签
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: ['60', '45', '30', '15', '0']
-                                  .map((label) => Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)))
-                                  .toList(),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: hourlyOrders.asMap().entries.map((entry) {
-                                        return Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                  height: entry.value * 3,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.green[400],
-                                                    borderRadius: BorderRadius.circular(4),
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Text(
-                                                  hours[entry.key],
-                                                  style: const TextStyle(fontSize: 10),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(width: 24),
 
                   // 类别收入
                   Expanded(
@@ -417,34 +326,56 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
 
               const SizedBox(height: 24),
             ],
+
+
           ),
         ),
       ),
-      // 底部导航栏
+
+      //bottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: 0,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Dashboard()),
+            );
+          } else if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => POSpage()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Tablescreen()),
+            );
+          } else if (index == 3){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EmployeePage()),
+            );
+          }else if (index == 4) {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => POSpage()),
+            // );
+          }else if (index == 5) {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => EmployeePage()),
+            // );
+          }
+        },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.point_of_sale),
-            label: 'POS',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_chart),
-            label: 'Tables',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_menu),
-            label: 'Kitchen',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory),
-            label: 'Inventory',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined), label: 'POS'),
+          BottomNavigationBarItem(icon: Icon(Icons.table_chart), label: 'Tables'),
+          BottomNavigationBarItem(icon: Icon(Icons.kitchen), label: 'Kitchen'),
+          BottomNavigationBarItem(icon: Icon(Icons.view_day_sharp), label: 'Inventory'),
         ],
       ),
     );
@@ -459,27 +390,6 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(data['icon'], color: data['color']),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: (data['change'] as String).startsWith('+') ? Colors.green[100] : Colors.red[100],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    data['change'],
-                    style: TextStyle(
-                      color: (data['change'] as String).startsWith('+') ? Colors.green[800] : Colors.red[800],
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             Text(
               data['title'],
               style: const TextStyle(
@@ -487,13 +397,45 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
                 fontSize: 14,
               ),
             ),
-            Text(
-              data['value'],
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  data['value'],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 2,vertical: 2),
+                  decoration: BoxDecoration(
+                    color: (data['change'] as String).startsWith('+') ? Colors.green[100] : Colors.red[100],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(data['icon'], color: data['color']),
+                ),
+              ],
+            ),
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: (data['change'] as String).startsWith('+') ? Colors.green[100] : Colors.red[100],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                data['change'],
+                style: TextStyle(
+                  color: (data['change'] as String).startsWith('+') ? Colors.green[800] : Colors.red[800],
+                  fontSize: 5,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
+
           ],
         ),
       ),
@@ -542,7 +484,12 @@ class _ReportsAnalyticsPageState extends State<ReportsAnalyticsPage> {
       ],
     );
   }
+
 }
+
+
+
+
 
 
 

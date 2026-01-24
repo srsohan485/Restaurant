@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurantpro/pos.dart';
+import 'package:restaurantpro/reportpage.dart';
 import 'package:restaurantpro/table.dart';
 
 import 'customerpage.dart';
@@ -72,6 +73,7 @@ class _DashboardState extends State<Dashboard> {
     InventoryPage(),
     CustomerPage(),
     EmployeePage(),
+    Reportpage(),
     OffersPage(),
 
 
