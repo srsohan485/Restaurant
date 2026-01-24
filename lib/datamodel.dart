@@ -377,7 +377,44 @@ final OfferModel weekendOffer = OfferModel(
 );
 
 
+class Customer {
+  final String name;
+  final double rating;
+  final String phone;
+  final String email;
+  final String address;
+  final int loyaltyPoints;
+  final double totalSpent;
+  final int totalOrders;
+  final String lastVisit;
 
+  Customer({
+    required this.name,
+    required this.rating,
+    required this.phone,
+    required this.email,
+    required this.address,
+    required this.loyaltyPoints,
+    required this.totalSpent,
+    required this.totalOrders,
+    required this.lastVisit,
+  });
+}
+
+
+List<Customer> customers = [
+  Customer(
+    name: "Ahmed Rahman",
+    rating: 4.5,
+    phone: "+880 1711-23456",
+    email: "ahmed@example.com",
+    address: "Dhaka, Bangladesh",
+    loyaltyPoints: 250,
+    totalSpent: 1251,
+    totalOrders: 45,
+    lastVisit: "2 days ago",
+  ),
+];
 
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'customerpage.dart';
 import 'dashboard.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Dashboard(),
+      home: CustomerPage(),
     );
   }
 

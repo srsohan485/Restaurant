@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurantpro/pos.dart';
 import 'package:restaurantpro/table.dart';
 
+import 'customerpage.dart';
 import 'employepage.dart';
 import 'datamodel.dart';
 import 'invetory.dart';
@@ -67,10 +68,12 @@ class _DashboardState extends State<Dashboard> {
     const Dashboard(),
     POSpage(),
     Tablescreen(),
-    EmployeePage(),
     KitchenOrderPage(),
     InventoryPage(),
+    CustomerPage(),
+    EmployeePage(),
     OffersPage(),
+
 
   ];
 
